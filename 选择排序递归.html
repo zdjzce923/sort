@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 求出最小值
+      let min = numbers => {
+        if (numbers.length > 2) {
+          return min([numbers[0], min(numbers.slice(1))])
+        } else {
+          return Math.min.apply(null, numbers)
+        }
+      }
+      // 获取最小值索引
+      let minIndex = numbers => {
+        return numbers.indexOf(min(numbers))
+      }
+      // 进行排序 思路 1.获取最小值 2.每次都将最小值进行剔除 最后再用上一次求出的最小值和后面的数值连接
+      let sort = numbers => {
+        if (numbers.length > 2) {
+          let index = minIndex(numbers)
+          let min = numbers[index]
+          numbers.splice(index, 1)
+          return [min].concat(sort(numbers))
+        } else {
+          return numbers[0] < numbers[1] ? numbers : numbers.reverse()
+        }
+      }
+      const arr = [123, 345, 6757, 23, 224, 6432, 113, 41]
+      console.log(sort(arr))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*  最小值函数思路： 默认索引0为最小的值 先从第一个值开始和0比较 只要比0小就让最小值的索引为这个i值
+       接下来的循环每次都会判断当前数值是否比最小数值小 */
+      let min = numbers => {
+        let minIndex = 0
+        for (let i = 1; i < numbers.length; i++) {
+          if (numbers[i] < numbers[minIndex]) {
+            minIndex = i
+          }
+        }
+        return minIndex
+      }
+      // 互换数值函数
+      let exchange = (array, i, j) => {
+        let temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+      // sort函数 求出每次的最小值，每次求值都剔除掉i个防止最小值重复，如果最小值索引与当前i不同就和i调换
+      let sort = numbers => {
+        for (let i = 0; i < numbers.length - 1; i++) {
+          let index = min(numbers.slice(i)) + i
+          if (index !== i) {
+            exchange(numbers, index, i)
+          }
+        }
+        return numbers
+      }
+      const arr = [4, 46, 86, 41, 55]
+      console.log(sort(arr))
+    </script>
+  </body>
+</html>

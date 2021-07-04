@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 归并排序 将数组分成两半 直到最后每一半剩一个数字就默认排好序了。最后再进行合并
+      let mergeSort = arr => {
+        let length = arr.length
+        if (length === 1) {
+          return arr
+        }
+        let left = arr.slice(0, Math.floor(length / 2))
+        let right = arr.slice(Math.floor(length / 2))
+        return merge(mergeSort(left), mergeSort(right))
+      }
+      // merge函数
+      let merge = (a, b) => {
+        if (a.length === 0) return b
+        if (b.length === 0) return a
+        return a[0] > b[0]
+          ? [b[0]].concat(merge(a, b.slice(1)))
+          : [a[0]].concat(merge(b, a.slice(1)))
+      }
+      const arr = [4, 2, 56, 9, 1]
+      console.log(mergeSort(arr))
+    </script>
+  </body>
+</html>
